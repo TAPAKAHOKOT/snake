@@ -155,31 +155,5 @@ def draw_field(stdscr):
 def main():
     curses.wrapper(draw_field)
 
-main()
-# if __name__ == "__main__":
-#     main()
-"""
-
-
-
-import curses
-import time
-
-def main(stdscr):
-    curses.start_color()
-    curses.use_default_colors()
-    for i in range(0, 255):
-        curses.init_pair(i + 1, i, -1)
-    try:
-        for i in range(0, 255):
-            stdscr.addstr(str(i) + " ", curses.color_pair(i))
-    except curses.ERR:
-        # End of screen reached
-        pass
-    
-    stdscr.getch()
-    time.sleep(100)
-
-curses.wrapper(main)
-
-"""
+if __name__ == "__main__":
+    main()
