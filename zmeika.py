@@ -1,4 +1,4 @@
-
+# import moduls
 import json
 import time
 import sys,os
@@ -7,10 +7,11 @@ import keyboard as kb
 from random import randint as rn
 import ctypes
 
-
+# set cmd size
 size = [30, 30]
 os.system("mode con cols={} lines={}".format( size[0] * 2, size[1] + 1))
 
+# function that will create a field
 def create_field(size):
 
     arr = []
@@ -22,11 +23,13 @@ def create_field(size):
 
     return arr
 
+# Function that changes coordinates
 def move(coors, speed):
     new_coors =[ [ coors[0][0] + speed[0], coors[0][1] + speed[1] ] ]
     for k in coors[:-1]: new_coors.append(k)
     return new_coors
 
+# fuction that  detects keystrokes
 def check_keys(speed):
 
     return [1, 0] if kb.is_pressed('d') and speed[0] != -1 else (
@@ -34,11 +37,12 @@ def check_keys(speed):
             [0, 1] if kb.is_pressed("s") and speed[1] != -1 else (
             [0, -1] if kb.is_pressed("w") and speed[1] != 1 else 0)))
 
-
+# function that increases snake's tail
 def add_tail(coors):
     coors.append(coors[-1])
     return coors
 
+# finction that draws field
 def draw_field(stdscr):
 
     # Clear and refresh the screen for a blank canvas
@@ -76,6 +80,7 @@ def draw_field(stdscr):
 
             coors = move(coors, speed)
 
+            # enumeration of all cells on the field
             for y_ind, line in enumerate(arr):
                 for x_ind, let in enumerate(line):
                     if [x_ind, y_ind] == coors[0]:
@@ -133,6 +138,7 @@ def draw_field(stdscr):
         time.sleep(0.04)
     os.system("cls")
 
+    # download data from / to json file
     with open("data_zmey.json", 'a') as f: f.close()
     with open('data_zmey.json', 'r') as file:
 	    try:
@@ -151,9 +157,9 @@ def draw_field(stdscr):
     print("YOUR SCORE IS {}".format(len(coors)))
     print("BEST SCORE IS {}".format(best))
 
-
+# main function
 def main():
     curses.wrapper(draw_field)
-
+# run main function
 if __name__ == "__main__":
     main()
